@@ -116,7 +116,7 @@ const createNoteCards = (array) => {
                                     <p class="card-text">${obj.name}</p>
                                     <div class="d-flex justify-content-between">
                                         <button class="btn btn-danger" onclick="handleDeleteCollection(${obj.id})">Delete</button>
-                                         <button id="{${obj.id}" class="btn btn-primary" onclick="test(${obj.id})" type="button" >
+                                         <button id="{${obj.id}" class="btn btn-primary" onclick="collectionSubmit(${obj.id})" type="button" >
                                         Select
                                         </button>
                                         <button onclick="getCollectionById(${obj.id})" type="button" class="btn btn-primary"
@@ -162,7 +162,7 @@ async function getCollection(collectionId) {
 // collectionCard.addEventListener("submit",getCollection())
 let collectionId = document.getElementById("")
 
-async function test(id) {
+async function getCollectionId(id) {
     await fetch(baseUrlCollections + collectionId, {
         method: "GET",
         headers: headers
@@ -185,25 +185,9 @@ collectionId.addEventListener("submit",(e) => {
 
 
 
-const collectionSubmit = async (evt) =>{
-    evt.preventDefault();
-    console.log("HandleSubmit")
-    let bodyObj = {
-        id: collectionId.value,
-    }
-    const response = await fetch(`${baseUrlCollection}/{collectionId}`,{
-        method :"POST",
-        body:JSON.stringify(bodyObj),
-        headers:headers
-    })
-        .catch(err => console.error(err.message))
+async function collectionSubmit(id) {
+    document.cookie = `collectionId= ${id}`
+    window.location.replace("http://localhost:8080/items.html")
 
-    const responseArr = await response.json()
-    console.log("get collection HandleSubmit after response" + responseArr)
-    console.log(responseArr[1])
-    if(response.status === 200){
-        document.cookie = `collectionId=${responseArr[1]}`
-        window.location.replace(responseArr[0])
-    }
 }
-collectionCard.addEventListener("submit",collectionSubmit)
+// collectionCard.addEventListener("submit",collectionSubmit)
