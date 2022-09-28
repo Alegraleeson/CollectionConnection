@@ -30,7 +30,7 @@ public class ItemDto implements Serializable {
     private String keywords;
     private String notes;
     private UserDto userDto;
-    private Set<Collection> collections = new HashSet<>();
+    private CollectionDto collectionDto;
 
     public ItemDto(Item item){
         if(item.getId() != null){

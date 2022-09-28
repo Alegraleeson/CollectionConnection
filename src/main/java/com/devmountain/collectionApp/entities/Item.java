@@ -14,7 +14,6 @@ import java.util.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@Inheritance(strategy = InheritanceType.JOINED)
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,27 +56,10 @@ public class Item {
     @JsonBackReference
     private User user;
 
-//    @ManyToMany(fetch = FetchType.EAGER,
-//            cascade = {
-//                    CascadeType.PERSIST,
-//                    CascadeType.MERGE
-//            },
-//            mappedBy = "items")
-//    @JsonIgnore
-//    private Set<Collection> collections = new HashSet<>();
+    @ManyToOne
+    @JsonBackReference
+    private Collection collection;
 
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @JoinTable(
-            name = "collection_items",
-            joinColumns = @JoinColumn(
-                    name = "items", referencedColumnName = "id"
-            ),
-            inverseJoinColumns = @JoinColumn(
-                    name = "collections", referencedColumnName = "id"
-            )
-    )
-    private Set<Collection> collections;
 
 
     public Item(ItemDto itemDto){
@@ -114,13 +96,6 @@ public class Item {
 
     }
 
-    public Set<Collection> getCollections(){
-        return collections;
-    }
-
-        public void setCollections(Set<Collection> collections) {
-            this.collections = collections;
-        }
 
 
 }

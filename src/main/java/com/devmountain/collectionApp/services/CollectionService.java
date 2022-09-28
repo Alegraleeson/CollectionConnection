@@ -2,6 +2,7 @@ package com.devmountain.collectionApp.services;
 
 import com.devmountain.collectionApp.dtos.CollectionDto;
 import com.devmountain.collectionApp.dtos.ItemDto;
+import com.devmountain.collectionApp.dtos.UserDto;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -23,6 +24,10 @@ public interface CollectionService {
     //    find all collections by user
     List<CollectionDto> getAllCollectionsByUserId(Long userId);
 
-    //    get a collection by collection id
+//        get a collection by collection id
     Optional<CollectionDto> getCollectionById(Long collectionId);
+
+//    Optional<CollectionDto> getCollection(Long collectionId);
+
+    List<String> goToCollection(CollectionDto collectionDto);
 }

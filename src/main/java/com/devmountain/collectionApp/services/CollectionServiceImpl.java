@@ -2,6 +2,7 @@ package com.devmountain.collectionApp.services;
 
 import com.devmountain.collectionApp.dtos.CollectionDto;
 import com.devmountain.collectionApp.dtos.ItemDto;
+import com.devmountain.collectionApp.dtos.UserDto;
 import com.devmountain.collectionApp.entities.Collection;
 import com.devmountain.collectionApp.entities.Item;
 import com.devmountain.collectionApp.entities.User;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -71,7 +73,7 @@ public class CollectionServiceImpl implements CollectionService {
         return Collections.emptyList();
     }
 
-    //    get a collection by collection id
+//        get a collection by collection id
     @Override
     public Optional<CollectionDto> getCollectionById(Long collectionId){
         Optional<Collection> collectionOptional = collectionRepository.findById(collectionId);
@@ -81,4 +83,18 @@ public class CollectionServiceImpl implements CollectionService {
         return Optional.empty();
     }
 
+    @Override
+    public List<String> goToCollection(CollectionDto collectionDto){
+        List<String> response = new ArrayList<>();
+        Optional<Collection> collectionOptional = collectionRepository.findById(collectionDto.getId());
+        if (collectionOptional.isPresent()){
+            response.add("http://localhost:8080/items.html");
+            response.add(String.valueOf(collectionOptional.get().getId()));
+        } else {
+            response.add("Collection cannot be found");
+        }
+        return response;
+    }
+
 }
+

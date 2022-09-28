@@ -20,7 +20,7 @@ public class UserDto implements Serializable {
     private String first_name;
     private String last_name;
     private String email;
-    private Set<Item> itemSet = new HashSet<>();
+    private Set<ItemDto> itemDtoSet = new HashSet<>();
     private Set<CollectionDto> collectionDtoSet = new HashSet<>();
 
     public UserDto(User user) {

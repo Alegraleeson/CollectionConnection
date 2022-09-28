@@ -4,21 +4,10 @@ const userId = cookieArr[1];
 const submitForm = document.getElementById("collection-form")
 const collectionContainer = document.getElementById("collection-container")
 const name = document.getElementById('collectionName-input')
-const itemName = document.getElementById('collectionItemName-input')
-const brand = document.getElementById('collectionItemBrand-input')
-const stockPhoto = document.getElementById('collectionItemStockPhoto-input')
-const originalPrice = document.getElementById('collectionItemOriginalPrice-input')
-const userPhoto = document.getElementById('collectionUserPhoto-input')
-const boughtPrice = document.getElementById('collectionBoughtPrice-input')
-const dateAcquired = document.getElementById('collectionDateAcquired-input')
-const currentValue = document.getElementById('collectionCurrentValue-input')
-const keywords = document.getElementById('collectionItemKeywords-input')
-const notes = document.getElementById('collectionItemNotes-input')
-const currentLocation = document.getElementById('collectionCurrentValue-input')
 
 let itemBody = document.getElementsByClassName('item-body')
-let collectionBody = document.getElementsByClassName('collection-body')
-let updateItemBtn = document.getElementById('update-item-button')
+let collectionBody = document.getElementById('collection-name')
+let updateCollectionBtn = document.getElementById('update-collection-button')
 
 const headers = {
     'Content-Type': 'application/json'
@@ -36,61 +25,20 @@ function handleLogout(){
 
 }
 
-const handleSubmitItem = async (e) => {
-    e.preventDefault()
-    let bodyObj = {
-        name: name.value,
-        brand: brand.value,
-        stock_photo: stockPhoto.value,
-        original_price: originalPrice.value,
-        keywords: keywords.value,
-        notes: notes.value
 
-    }
-    await addItem(bodyObj);
-        name.value = ''
-        brand.value = ''
-        stockPhoto.value = ''
-        originalPrice.value = ''
-        keywords.value = ''
-        notes.value = ''
-
-}
 
 const handleSubmitCollection = async (e) => {
     e.preventDefault()
     let bodyObj = {
-        name: name.value,
-        user_photo: userPhoto.value,
-        amount_paid: boughtPrice.value,
-        date_acquired: dateAcquired.value,
-        current_location: currentLocation.value,
-        current_value: currentValue.value,
+        name: name.value
+
 
     }
 
     await addCollection(bodyObj);
     name.value = ''
-    userPhoto.value = ''
-    boughtPrice.value = ''
-    dateAcquired.value = ''
-    currentLocation.value = ''
-    currentValue.value = ''
-
-}
 
 
-async function addItem(obj) {
-    const response = await fetch(`${baseUrlItems}user/${userId}`, {
-        method: "POST",
-        body: JSON.stringify(obj),
-        headers: headers
-
-    })
-        .catch(err => console.error(err.message))
-    if (response.status == 200) {
-        return getItems(userId);
-    }
 }
 
 async function addCollection(obj) {
@@ -106,15 +54,6 @@ async function addCollection(obj) {
     }
 }
 
-async function getItems(userId){
-    await fetch(`${baseUrlItems}user/${userId}`, {
-    method: "GET",
-    headers: headers
-    })
-    .then(response => response.json())
-    .then(data => createNoteCards(data))
-    .catch(err => console.error(err))
-}
 
 async function getCollections(userId){
     await fetch(`${baseUrlCollections}user/${userId}`, {
@@ -124,16 +63,6 @@ async function getCollections(userId){
         .then(response => response.json())
         .then(data => createNoteCards(data))
         .catch(err => console.error(err))
-}
-
-async function getItemById(itemId){
-    await fetch(baseUrlItems + itemId, {
-        method: "GET",
-        headers: headers
-    })
-    .then(res => res.json())
-    .then(data => populateModal(data))
-    .catch(err => console.error(err.message))
 }
 
 async function getCollectionById(collectionId){
@@ -146,29 +75,16 @@ async function getCollectionById(collectionId){
         .catch(err => console.error(err.message))
 }
 
-async function handleItemEdit(itemId){
-    let bodyObj = {
-        id: itemId,
-        body: itemBody.value
-    }
-
-    await fetch(baseUrl, {
-        method: "PUT",
-        body: JSON.stringify(bodyObj),
-        headers: headers
-    })
-    .catch(err => console.error(err))
-
-    return getItems(userId);
-}
 
 async function handleCollectionEdit(collectionId){
     let bodyObj = {
         id: collectionId,
-        body: collectionBody.value
+        name: collectionBody.value
     }
+    console.log(collectionId)
+    console.log(collectionBody)
 
-    await fetch(baseUrl, {
+    await fetch(baseUrlCollections, {
         method: "PUT",
         body: JSON.stringify(bodyObj),
         headers: headers
@@ -176,17 +92,6 @@ async function handleCollectionEdit(collectionId){
         .catch(err => console.error(err))
 
     return getCollections(userId);
-}
-
-async function handleDeleteItem(itemId){
-    await fetch(baseUrlItems + itemId, {
-        method: "DELETE",
-        headers: headers
-    })
-
-    .catch(err => console.error(err))
-
-    return getItems(userId);
 }
 
 async function handleDeleteCollection(collectionId){
@@ -208,36 +113,97 @@ const createNoteCards = (array) => {
         collectionCard.innerHTML = `
             <div class="card d-flex" style="width: 18rem; height: 18rem;">
                                 <div class="card-body d-flex flex-column justify-content-between" style="height: available">
-                                    <p class="card-text">${obj.body}</p>
+                                    <p class="card-text">${obj.name}</p>
                                     <div class="d-flex justify-content-between">
                                         <button class="btn btn-danger" onclick="handleDeleteCollection(${obj.id})">Delete</button>
+                                         <button id="{${obj.id}" class="btn btn-primary" onclick="test(${obj.id})" type="button" >
+                                        Select
+                                        </button>
                                         <button onclick="getCollectionById(${obj.id})" type="button" class="btn btn-primary"
-                                        data-bs-toggle="modal" data-bs-target="#item-edit-modal">
+                                        data-bs-toggle="modal" data-bs-target="#collection-edit-modal">
                                         Edit
                                         </button>
                                     </div>
                                 </div>
                             </div>
              `
-
-
-
-
         collectionContainer.append(collectionCard);
     })
 }
 
 const populateModal = (obj) => {
-    itemBody.innerText = ''
-    itemBody.innerText = obj.body
-    updateItemBtn.setAttribute('data-item-id', obj.id)
+    collectionBody.innerText = ''
+    collectionBody.innerText = obj.body
+    updateCollectionBtn.setAttribute('data-collection-id', obj.id)
 }
 
-getCollections(userId);
+getCollections(userId).then(console.log("get collections success"));
 
 submitForm.addEventListener("submit", handleSubmitCollection)
 
-updateItemBtn.addEventListener("click", (e) =>{
-    let itemId = e.target.getAttribute('data-item-id')
-    handleItemEdit(itemId);
+updateCollectionBtn.addEventListener("click", (e) =>{
+    let collectionId = e.target.getAttribute('data-collection-id')
+    handleCollectionEdit(collectionId);
 })
+
+async function getCollection(collectionId) {
+    const response = await fetch(baseUrlCollections + collectionId, {
+        method: "GET",
+        headers: headers
+    })
+    if (response.status === 200) {
+        document.cookie = `collectionId=${responseArr[1]}`
+        window.location.replace(responseArr[0])
+    }
+}
+
+
+
+// collectionCard.addEventListener("submit",getCollection())
+let collectionId = document.getElementById("")
+
+async function test(id) {
+    await fetch(baseUrlCollections + collectionId, {
+        method: "GET",
+        headers: headers
+    })
+        .then (res => res.json())
+        .then (data => one(data))
+        .catch (err => console.error(err.message));
+
+
+    }
+
+const one = (obj) =>{
+    collectionId.setAttribute("collectionId", obj);
+
+}
+collectionId.addEventListener("submit",(e) => {
+    let collId = e.target.getAttribute("collectionId");
+    collectionSubmit(collId)
+})
+
+
+
+const collectionSubmit = async (evt) =>{
+    evt.preventDefault();
+    console.log("HandleSubmit")
+    let bodyObj = {
+        id: collectionId.value,
+    }
+    const response = await fetch(`${baseUrlCollection}/{collectionId}`,{
+        method :"POST",
+        body:JSON.stringify(bodyObj),
+        headers:headers
+    })
+        .catch(err => console.error(err.message))
+
+    const responseArr = await response.json()
+    console.log("get collection HandleSubmit after response" + responseArr)
+    console.log(responseArr[1])
+    if(response.status === 200){
+        document.cookie = `collectionId=${responseArr[1]}`
+        window.location.replace(responseArr[0])
+    }
+}
+collectionCard.addEventListener("submit",collectionSubmit)

@@ -24,19 +24,9 @@ public class ItemController {
     @Autowired
     private CollectionService collectionService;
 
-    @GetMapping("/collections/{collectionId}/items")
+    @GetMapping("/collection/{collectionId}")
     public List<ItemDto> getItemsByCollection(@PathVariable Long collectionId){
         return itemService.getAllItemsByCollectionId(collectionId);
-    }
-
-    @GetMapping("/collections/{collectionId}/items")
-    public ResponseEntity<List<Item>> getAllItemsByCollectionId(@PathVariable(value = "collectionId") Long collectionId) {
-        if (!collectionRepository.existsById(collectionId)) {
-            throw new ResourceNotFoundException("Not found Tutorial with id = " + collectionId);
-        }
-
-        List<Item> tags = itemRepository.findTagsByCollectionsId(collectionId);
-        return new ResponseEntity<>(tags, HttpStatus.OK);
     }
 
     //    add a new item
@@ -59,31 +49,5 @@ public class ItemController {
     public Optional<ItemDto> getItemById(@PathVariable Long itemId){
         return itemService.getItemById(itemId);
     }
-
-//    @ModelAttribute("collectionNames")
-//    public List<CollectionDto> getCollections();
-//    {
-//        ArrayList<CollectionDto> collections = new ArrayList<CollectionDto>();
-//        collections.add(new CollectionDto(-1,  "Select Collection"));
-//        (int i = 0, i< collections.size, i++){
-//            collections.add(new CollectionDto(i, collections[i].name));
-//    }
-//        departments.add(new DepartmentVO(1,  "Human Resource"));
-//        departments.add(new DepartmentVO(2,  "Finance"));
-//        departments.add(new DepartmentVO(3,  "Information Technology"));
-//        return departments;
-//    }
-//
-//    @ModelAttribute("educationDetails")
-//
-//    public List<String> educationDetailsList()
-//    {
-//        List<String> educationList = Arrays.asList(
-//                "10th class", "Intermediate", "Graduation",
-//                "Post Graduation");
-//
-//        return educationList;
-//    }
-
 
 }

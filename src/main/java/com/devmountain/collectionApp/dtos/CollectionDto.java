@@ -21,7 +21,8 @@ public class CollectionDto {
 
     private UserDto userDto;
     private ItemDto itemDto;
-    private Set<Item> items = new HashSet<>();
+
+
 
     public CollectionDto(Collection collection){
         if(collection.getId() != null){
@@ -34,18 +35,6 @@ public class CollectionDto {
 
     }
 
-//    public void addItem(Item item) {
-//        this.items.add(item);
-//        item.getCollections().add(this);
-//    }
-//
-//    public void removeItem(long itemId) {
-//        Item item = this.items.stream().filter(item -> item.getId() == itemId).findFirst().orElse(null);
-//        if (item != null) {
-//            this.items.remove(item);
-//            item.getItems().remove(this);
-//        }
-//    }
 
 
 

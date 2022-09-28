@@ -17,40 +17,45 @@
 <a class="btn btn-danger navbar-btn" href="./home.html" >Collections</a>
 <h1>Items</h1>
 
-<div class="container" id="home-container">
-  <div id="collection-form-container">
-    <form id="collection-form">
+<div class="container" id="items-container">
+  <div id="item-form-container">
+    <form id="item-form">
       <div class="form-group">
         <label for="collectionName-input">Collection Name</label>
         <form:select class="form-control" id="collectionName-input" path="collectionName">
-          <form:options id="collectionName-select" items="${collectionNames}" itemValue="abc" itemLabel="xyz"/>
-        <label for="collectionItemName-input">Item Name</label>
-        <textarea class="form-control" id="collectionItemName-input" class="item-input" placeholder="Item Name" rows="1"></textarea>
-        <label for="collectionItemBrand-input">Brand</label>
-        <textarea class="form-control" id="collectionItemBrand-input" class="item-input" placeholder="Brand" rows="1"></textarea>
-        <label for="collectionItemStockPhoto-input">Stock Photo</label>
-        <textarea class="form-control" id="collectionItemStockPhoto-input" class="item-input" placeholder="Stock Photo" rows="1"></textarea>
-        <label for="collectionItemOriginalPrice-input">Original Price</label>
-        <textarea class="form-control" id="collectionItemOriginalPrice-input" class="item-input" placeholder="Original Price" rows="1"></textarea>
-        <label for="collectionUserPhoto-input">User Photo</label>
-        <textarea class="form-control" id="collectionUserPhoto-input" class="item-input" placeholder="User Photo" rows="1"></textarea>
-        <label for="collectionBoughtPrice-input">Bought Price</label>
-        <textarea class="form-control" id="collectionBoughtPrice-input" class="item-input" placeholder="Price Paid" rows="1"></textarea>
-        <label for="collectionDateAcquired-input">Date Acquired</label>
-        <input type="date" class="form-control" id="collectionDateAcquired-input" class="item-input" placeholder="YYYY-MM-DD" rows="1"></input>
-        <label for="collectionCurrentLocation-input">Current Location</label>
-        <textarea class="form-control" id="collectionCurrentLocation-input" class="item-input" placeholder="Current Location" rows="1"></textarea>
-        <label for="collectionCurrentValue-input">Current Estimated Value</label>
-        <textarea class="form-control" id="collectionCurrentValue-input" class="item-input" placeholder="Current Estimated Value" rows="1"></textarea>
-        <label for="collectionItemKeywords-input">Keywords</label>
-        <textarea class="form-control" id="collectionItemKeywords-input" class="item-input" placeholder="Keywords" rows="1"></textarea>
-        <label for="collectionItemNotes-input">Notes</label>
-        <textarea class="form-control" id="collectionItemNotes-input" class="item-input" placeholder="Notes" rows="5"></textarea>
+          <form:option disabled>Please select...</form:option>
+          <form:options items="${collection.name}" />
+<!--          <option th:each="i : ${#collectionNames}" th:value="${i.id}" th:text="${i.name}">-->
+<!--          </option>-->
+          <option id="collectionName-select" items="${collectionNames}" itemValue="abc" itemLabel="xyz"/>
+        </form:select>
+        <label for="itemItemName-input">Item Name</label>
+        <textarea class="form-control" id="itemItemName-input" class="item-input" placeholder="Item Name" rows="1"></textarea>
+        <label for="itemItemBrand-input">Brand</label>
+        <textarea class="form-control" id="itemItemBrand-input" class="item-input" placeholder="Brand" rows="1"></textarea>
+        <label for="itemItemStockPhoto-input">Stock Photo</label>
+        <textarea class="form-control" id="itemItemStockPhoto-input" class="item-input" placeholder="Stock Photo" rows="1"></textarea>
+        <label for="itemItemOriginalPrice-input">Original Price</label>
+        <textarea class="form-control" id="itemItemOriginalPrice-input" class="item-input" placeholder="Original Price" rows="1"></textarea>
+        <label for="itemUserPhoto-input">User Photo</label>
+        <textarea class="form-control" id="itemUserPhoto-input" class="item-input" placeholder="User Photo" rows="1"></textarea>
+        <label for="itemBoughtPrice-input">Bought Price</label>
+        <textarea class="form-control" id="itemBoughtPrice-input" class="item-input" placeholder="Price Paid" rows="1"></textarea>
+        <label for="itemDateAcquired-input">Date Acquired</label>
+        <input type="date" class="form-control" id="itemDateAcquired-input" class="item-input" placeholder="YYYY-MM-DD" rows="1"></input>
+        <label for="itemCurrentLocation-input">Current Location</label>
+        <textarea class="form-control" id="itemCurrentLocation-input" class="item-input" placeholder="Current Location" rows="1"></textarea>
+        <label for="itemCurrentValue-input">Current Estimated Value</label>
+        <textarea class="form-control" id="itemCurrentValue-input" class="item-input" placeholder="Current Estimated Value" rows="1"></textarea>
+        <label for="itemItemKeywords-input">Keywords</label>
+        <textarea class="form-control" id="itemItemKeywords-input" class="item-input" placeholder="Keywords" rows="1"></textarea>
+        <label for="itemItemNotes-input">Notes</label>
+        <textarea class="form-control" id="itemItemNotes-input" class="item-input" placeholder="Notes" rows="5"></textarea>
       </div>
       <button id="submit-button" type="submit" class="btn btn-primary mt-1">Submit</button>
     </form>
 
-    <div id="collection-container" class="container-fluid"></div>
+    <div id="item-container" class="container-fluid"></div>
   </div>
 </div>
 
@@ -64,16 +69,16 @@
       </div>
       <div class="modal-body d-flex">
         <textarea class="form-control" id="collection-name" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="collection-itemName" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="collection-itemBrand" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="collection-itemStockPhoto" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="collection-itemOriginalPrice" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="collection-userPhoto" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="collection-BoughtPrice" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="collection-dateAcquired" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="collection-currentValue" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="collection-itemKeywords" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="collection-itemNotes" class="item-body" rows="5"></textarea>
+        <textarea class="form-control" id="item-name" class="item-body" rows="1"></textarea>
+        <textarea class="form-control" id="item-brand" class="item-body" rows="1"></textarea>
+        <textarea class="form-control" id="item-stockPhoto" class="item-body" rows="1"></textarea>
+        <textarea class="form-control" id="item-originalPrice" class="item-body" rows="1"></textarea>
+        <textarea class="form-control" id="item-userPhoto" class="item-body" rows="1"></textarea>
+        <textarea class="form-control" id="item-boughtPrice" class="item-body" rows="1"></textarea>
+        <textarea class="form-control" id="item-dateAcquired" class="item-body" rows="1"></textarea>
+        <textarea class="form-control" id="item-currentValue" class="item-body" rows="1"></textarea>
+        <textarea class="form-control" id="item-keywords" class="item-body" rows="1"></textarea>
+        <textarea class="form-control" id="item-notes" class="item-body" rows="5"></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -2,6 +2,7 @@ package com.devmountain.collectionApp.controllers;
 
 import com.devmountain.collectionApp.dtos.CollectionDto;
 import com.devmountain.collectionApp.dtos.ItemDto;
+import com.devmountain.collectionApp.dtos.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.devmountain.collectionApp.services.CollectionService;
@@ -40,6 +41,16 @@ public class CollectionController {
     public Optional<CollectionDto> getCollectionById(@PathVariable Long collectionId){
         return collectionService.getCollectionById(collectionId);
     }
+
+//    @PostMapping Mapping("/{collectionId}")
+//    public Optional<CollectionDto> getCollection(@RequestBody Long collectionId){
+//        return collectionService.getCollection(collectionId);
+//    }
+
+//    @PostMapping("/{collectionId}")
+//    public List<String> getCollectionById(@RequestBody CollectionDto collectionDto){
+//        return collectionService.getCollectionById(collectionDto);
+//    }
 
 
 }
