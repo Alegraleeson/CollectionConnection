@@ -21,14 +21,6 @@
   <div id="item-form-container">
     <form id="item-form">
       <div class="form-group">
-        <label for="collectionName-input">Collection Name</label>
-        <form:select class="form-control" id="collectionName-input" path="collectionName">
-          <form:option disabled>Please select...</form:option>
-          <form:options items="${collection.name}" />
-<!--          <option th:each="i : ${#collectionNames}" th:value="${i.id}" th:text="${i.name}">-->
-<!--          </option>-->
-          <option id="collectionName-select" items="${collectionNames}" itemValue="abc" itemLabel="xyz"/>
-        </form:select>
         <label for="itemItemName-input">Item Name</label>
         <textarea class="form-control" id="itemItemName-input" class="item-input" placeholder="Item Name" rows="1"></textarea>
         <label for="itemItemBrand-input">Brand</label>
@@ -62,23 +54,37 @@
 <!-- Modal -->
 <div class="modal fade" id="item-edit-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="note-edit-modal-title" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" style="width: fit-content; height: fit-content;">
       <div class="modal-header">
         <h5 class="modal-title" id="item-edit-modal-title">Edit Item</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body d-flex">
-        <textarea class="form-control" id="collection-name" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="item-name" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="item-brand" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="item-stockPhoto" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="item-originalPrice" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="item-userPhoto" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="item-boughtPrice" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="item-dateAcquired" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="item-currentValue" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="item-keywords" class="item-body" rows="1"></textarea>
-        <textarea class="form-control" id="item-notes" class="item-body" rows="5"></textarea>
+      <div class="modal-body d-flex" style="width: fit-content; height: fit-content;">
+        <form>
+          <label for="item-name">Item Name</label><br>
+          <textarea class="form-control" id="item-name" class="item-body" rows="1"></textarea><br>
+          <label for="item-brand">Brand</label><br>
+          <textarea class="form-control" id="item-brand" class="item-body" rows="1"></textarea><br>
+          <label for="item-stockPhoto">Stock Photo</label><br>
+          <textarea class="form-control" id="item-stockPhoto" class="item-body" rows="1"></textarea><br>
+          <label for="item-originalPrice">Original Price</label><br>
+          <textarea class="form-control" id="item-originalPrice" class="item-body" rows="1"></textarea><br>
+          <label for="item-userPhoto">User Photo</label><br>
+          <textarea class="form-control" id="item-userPhoto" class="item-body" rows="1"></textarea><br>
+          <label for="item-boughtPrice">Bought Price</label><br>
+          <textarea class="form-control" id="item-boughtPrice" class="item-body" rows="1"></textarea><br>
+          <label for="item-dateAcquired">Date Acquired</label><br>
+          <input type="date" class="form-control" id="item-dateAcquired" class="item-body" placeholder="YYYY-MM-DD" rows="1"></input>
+          <label for="item-currentValue">Current Value</label><br>
+          <textarea class="form-control" id="item-currentValue" class="item-body" rows="1"></textarea><br>
+          <label for="item-currentLocation">Current Location</label><br>
+          <textarea class="form-control" id="item-currentLocation" class="item-body" rows="1"></textarea><br>
+          <label for="item-keywords">Keywords</label><br>
+          <textarea class="form-control" id="item-keywords" class="item-body" rows="1"></textarea><br>
+          <label for="item-notes">Notes</label><br>
+          <textarea class="form-control" id="item-notes" class="item-body" rows="5"></textarea>
+        </form>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

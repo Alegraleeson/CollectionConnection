@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ItemService {
     //    adding an item
     @Transactional
-    void addItem(ItemDto itemDto, Long userId);
+    void addItem(ItemDto itemDto, Long userId, Long collectionId);
 
     //    delete an item
     @Transactional

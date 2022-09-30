@@ -30,10 +30,12 @@ public class ItemServiceImpl implements ItemService {
     //    adding an item
     @Override
     @Transactional
-    public void addItem(ItemDto itemDto, Long userId) {
+    public void addItem(ItemDto itemDto, Long userId, Long collectionId) {
         Optional<User> userOptional = userRepository.findById(userId);
+        Optional<Collection> collectionOptional = collectionRepository.findById(collectionId);
         Item item = new Item(itemDto);
         userOptional.ifPresent(item::setUser);
+        collectionOptional.ifPresent(item::setCollection);
         itemRepository.saveAndFlush(item);
 
     }
@@ -72,7 +74,7 @@ public class ItemServiceImpl implements ItemService {
     public List<ItemDto> getAllItemsByCollectionId(Long collectionId){
         Optional<Collection> collectionOptional = collectionRepository.findById(collectionId);
         if (collectionOptional.isPresent()){
-            List<Item> itemList = itemRepository.findAllByCollectionsEquals(collectionOptional.get().getId());
+            List<Item> itemList = itemRepository.findAllByCollectionEquals(collectionOptional.get());
             return itemList.stream().map(item -> new ItemDto(item)).collect(Collectors.toList());
         }
 

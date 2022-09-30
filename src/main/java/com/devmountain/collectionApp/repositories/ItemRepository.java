@@ -16,8 +16,11 @@ import java.util.List;
 public interface ItemRepository  extends JpaRepository<Item, Long> {
 
 
-    @Query(value = "SELECT collections FROM collection_items JOIN items ON items.item_id = collection_items.items", nativeQuery = true)
-    List<Item> findAllByCollectionsEquals(Long collectionId);
+    List<Item> findAllByCollectionEquals(Collection collection);
+
+
+//    @Query(value = "SELECT collections FROM collection_items JOIN items ON items.item_id = collection_items.items", nativeQuery = true)
+//    List<Item> findAllByCollectionsEquals(Long collectionId);
 
 
 }

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.devmountain.collectionApp.services.ItemService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,19 +25,24 @@ public class ItemController {
     @Autowired
     private CollectionService collectionService;
 
-    @GetMapping("/collection/{collectionId}")
+    @GetMapping("/from/{collectionId}")
     public List<ItemDto> getItemsByCollection(@PathVariable Long collectionId){
-        return itemService.getAllItemsByCollectionId(collectionId);
+        List<ItemDto> collectionOptional = itemService.getAllItemsByCollectionId(collectionId);
+        List<ItemDto> none = new ArrayList<>();
+        if(!collectionOptional.isEmpty()){
+            return collectionOptional;
+        }
+            return none;
     }
 
     //    add a new item
-    @PostMapping("/user/{userId}")
-    public void addItem(@RequestBody ItemDto itemDto,@PathVariable Long userId){
-        itemService.addItem(itemDto, userId);
+    @PostMapping("/collections/{collectionId}/{userId}")
+    public void addItem(@RequestBody ItemDto itemDto,@PathVariable Long collectionId, @PathVariable Long userId){
+        itemService.addItem(itemDto, userId, collectionId);
     }
 
     @DeleteMapping("/{itemId}")
-    public void deleteNoteById(@PathVariable Long itemId){
+    public void deleteItemById(@PathVariable Long itemId){
         itemService.deleteItemById(itemId);
     }
 

@@ -1,9 +1,9 @@
-const cookieArr = document.cookie.split("=")
-const userId = cookieArr[1];
+
+const userId = getCookie("userId")
+const collectionId = getCookie("collectionId")
 
 const submitForm = document.getElementById("item-form")
 const itemContainer = document.getElementById("item-container")
-// const name = document.getElementById('collectionName-input')
 const name = document.getElementById('itemItemName-input')
 const brand = document.getElementById('itemItemBrand-input')
 const stockPhoto = document.getElementById('itemItemStockPhoto-input')
@@ -28,6 +28,7 @@ let itemUserPhoto = document.getElementById("item-userPhoto")
 let itemBoughtPrice = document.getElementById("item-boughtPrice")
 let itemDateAcquired = document.getElementById("item-dateAcquired")
 let itemCurrentValue = document.getElementById("item-currentValue")
+let itemCurrentLocation = document.getElementById("item-currentLocation")
 let itemKeywords = document.getElementById("item-keywords")
 let itemNotes = document.getElementById("item-notes")
 
@@ -53,6 +54,8 @@ function handleLogout(){
 const handleSubmitItem = async (e) => {
     e.preventDefault()
     let bodyObj = {
+        user_id: userId,
+        collection_id: collectionId,
         name: name.value,
         brand: brand.value,
         stock_photo: stockPhoto.value,
@@ -82,7 +85,7 @@ const handleSubmitItem = async (e) => {
 }
 
 async function addItem(obj) {
-    const response = await fetch(`${baseUrlItems}user/${userId}`, {
+    const response = await fetch(`${baseUrlItems}collections/${collectionId}/${userId}`, {
         method: "POST",
         body: JSON.stringify(obj),
         headers: headers
@@ -90,14 +93,15 @@ async function addItem(obj) {
     })
         .catch(err => console.error(err.message))
     if (response.status == 200) {
-        return getItems(userId);
+        return getItems(collectionId);
     }
+
 }
 
 
 async function getItems(collectionId){
-    await fetch(`${baseUrlItems}collection/${collectionId}`, {
-        method: "GET",
+    await fetch(`${baseUrlItems}from/${collectionId}`, {
+    method: "GET",
         headers: headers
     })
         .then(response => response.json())
@@ -107,6 +111,7 @@ async function getItems(collectionId){
 
 
 async function getItemById(itemId){
+    console.log("getItemById" + itemId)
     await fetch(baseUrlItems + itemId, {
         method: "GET",
         headers: headers
@@ -117,19 +122,20 @@ async function getItemById(itemId){
 }
 
 async function handleItemEdit(itemId){
+    console.log("handleItemEdit" + itemId)
     let bodyObj = {
         id: itemId,
-        name: name.value,
-        brand: brand.value,
-        stock_photo: stockPhoto.value,
-        original_price: originalPrice.value,
-        user_photo: userPhoto.value,
-        amount_paid: boughtPrice.value,
-        date_acquired: dateAcquired.value,
-        current_location: currentLocation.value,
-        current_value: currentValue.value,
-        keywords: keywords.value,
-        notes: notes.value    }
+        name: itemName.value,
+        brand: itemBrand.value,
+        stock_photo: itemStockPhoto.value,
+        original_price: itemOriginalPrice.value,
+        user_photo: itemUserPhoto.value,
+        amount_paid: itemBoughtPrice.value,
+        date_acquired: itemDateAcquired.value,
+        current_location: itemCurrentLocation.value,
+        current_value: itemCurrentValue.value,
+        keywords: itemKeywords.value,
+        notes: itemNotes.value    }
 
     await fetch(baseUrlItems, {
         method: "PUT",
@@ -138,18 +144,8 @@ async function handleItemEdit(itemId){
     })
         .catch(err => console.error(err))
 
-    return getItems(collecctionId);
-    name.value = ''
-    brand.value = ''
-    stockPhoto.value = ''
-    originalPrice.value = ''
-    userPhoto.value = ''
-    boughtPrice.value = ''
-    dateAcquired.value = ''
-    currentLocation.value = ''
-    currentValue.value = ''
-    keywords.value = ''
-    notes.value = ''
+    return getItems(collectionId);
+
 }
 
 
@@ -162,7 +158,7 @@ async function handleDeleteItem(itemId){
 
         .catch(err => console.error(err))
 
-    return getItems(userId);
+    return getItems(collectionId);
 }
 
 
@@ -172,7 +168,7 @@ const createNoteCards = (array) => {
         let itemCard = document.createElement("div")
         itemCard.classList.add("m-2")
         itemCard.innerHTML = `
-            <div class="card d-flex" style="width: 18rem; height: 18rem;">
+            <div class="card d-flex" style="width: 18rem; height: fit-content;">
                                 <div class="card-body d-flex flex-column justify-content-between" style="height: available">
                                     <p class="card-text">${obj.name}</p>
                                     <p class="card-text">${obj.brand}</p>
@@ -195,16 +191,13 @@ const createNoteCards = (array) => {
                                 </div>
                             </div>
              `
-
-
-
-
         itemContainer.append(itemCard);
     })
 }
 
 const populateModal = (obj) => {
-    collectionName.innerText = ''
+    console.log("populateModal"+ obj)
+    console.log("populateModalId"+ obj.id)
     itemName.innerText = ''
     itemBrand.innerText = ''
     itemStockPhoto.innerText = ''
@@ -216,26 +209,45 @@ const populateModal = (obj) => {
     itemKeywords.innerText = ''
     itemNotes.innerText = ''
 
-    collectionName.innerText = obj.body
-    itemName.innerText = obj.body
-    itemBrand.innerText = obj.body
-    itemStockPhoto.innerText = obj.body
-    itemOriginalPrice.innerText = obj.body
-    itemUserPhoto.innerText = obj.body
-    itemBoughtPrice.innerText = obj.body
-    itemDateAcquired.innerText = obj.body
-    itemCurrentValue.innerText = obj.body
-    itemKeywords.innerText = obj.body
-    itemNotes.innerText = obj.body
+    itemName.innerText = obj.name
+    itemBrand.innerText = obj.brand
+    itemStockPhoto.innerText = obj.stock_photo
+    itemOriginalPrice.innerText = obj.original_price
+    itemUserPhoto.innerText = obj.user_photo
+    itemBoughtPrice.innerText = obj.amount_paid
+    itemDateAcquired.innerText = obj.date_acquired
+    itemCurrentValue.innerText = obj.current_value
+    itemKeywords.innerText = obj.keywords
+    itemNotes.innerText = obj.notes
     updateItemBtn.setAttribute('data-item-id', obj.id)
+    console.log("populateModalBtn"+ updateItemBtn.getAttribute('data-item-id'))
 }
 
 
-getItems(userId);
+getItems(collectionId);
 
 submitForm.addEventListener("submit", handleSubmitItem)
 
 updateItemBtn.addEventListener("click", (e) =>{
     let itemId = e.target.getAttribute('data-item-id')
+    console.log("updateItemBtn" + itemId)
     handleItemEdit(itemId);
 })
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+// console.log(document.cookie);
+// console.log(userId);
+// console.log(typeof userId);
+// console.log(collectionId)
+// console.log(typeof collectionId);
+

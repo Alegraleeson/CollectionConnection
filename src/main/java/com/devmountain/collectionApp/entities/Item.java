@@ -93,6 +93,9 @@ public class Item {
         if (itemDto.getCurrent_value() != null){
             this.current_value = itemDto.getCurrent_value();
         }
+        if (itemDto.getNotes() != null){
+            this.notes = itemDto.getNotes();
+        }
 
     }
 

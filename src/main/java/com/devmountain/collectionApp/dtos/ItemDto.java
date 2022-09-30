@@ -29,7 +29,9 @@ public class ItemDto implements Serializable {
     private Float current_value;
     private String keywords;
     private String notes;
+
     private UserDto userDto;
+
     private CollectionDto collectionDto;
 
     public ItemDto(Item item){
