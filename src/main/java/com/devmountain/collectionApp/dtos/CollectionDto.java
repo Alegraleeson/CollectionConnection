@@ -1,23 +1,24 @@
 package com.devmountain.collectionApp.dtos;
 
 import com.devmountain.collectionApp.entities.Collection;
-import com.devmountain.collectionApp.entities.Item;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SecondaryTable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CollectionDto {
     private Long id;
     private String name;
+
+    private String image;
+
+//    private byte[] image;
+
+//    private String photo;
 
     private UserDto userDto;
     private ItemDto itemDto;
@@ -31,11 +32,16 @@ public class CollectionDto {
         if (collection.getName() != null){
             this.name = collection.getName();
         }
+        if (collection.getImage() != null){
+            this.image = collection.getImage();
+        }
 
 
     }
 
-
-
-
+//    public String getPhoto(){
+//        return photo;
+//    }
+//    public void setPhoto(String fileName) {
+//    }
 }

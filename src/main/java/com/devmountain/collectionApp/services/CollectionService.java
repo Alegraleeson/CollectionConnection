@@ -1,9 +1,8 @@
 package com.devmountain.collectionApp.services;
 
 import com.devmountain.collectionApp.dtos.CollectionDto;
-import com.devmountain.collectionApp.dtos.ItemDto;
-import com.devmountain.collectionApp.dtos.UserDto;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +10,11 @@ import java.util.Optional;
 public interface CollectionService {
     //    add a collection
     @Transactional
-    void addCollection(CollectionDto collectionDto, Long userId);
+    CollectionDto addCollection(CollectionDto collectionDto, Long userId);
+
+    //    add a collection
+//    @Transactional
+//    CollectionDto addCollection(CollectionDto collectionDto, Long userId);
 
     //    delete a collection
     @Transactional
@@ -27,7 +30,16 @@ public interface CollectionService {
 //        get a collection by collection id
     Optional<CollectionDto> getCollectionById(Long collectionId);
 
+//    public Optional<CollectionDto> getImageById(Long collectionId);
+
 //    Optional<CollectionDto> getCollection(Long collectionId);
 
     List<String> goToCollection(CollectionDto collectionDto);
+
+
+
+//    CollectionDto save(CollectionDto collectionDto);
+
+//    @Transactional
+//    CollectionDto addCollection(Long userId, MultipartFile file, CollectionDto collectionDto);
 }

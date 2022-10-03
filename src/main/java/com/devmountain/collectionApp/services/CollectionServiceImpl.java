@@ -1,10 +1,7 @@
 package com.devmountain.collectionApp.services;
 
 import com.devmountain.collectionApp.dtos.CollectionDto;
-import com.devmountain.collectionApp.dtos.ItemDto;
-import com.devmountain.collectionApp.dtos.UserDto;
 import com.devmountain.collectionApp.entities.Collection;
-import com.devmountain.collectionApp.entities.Item;
 import com.devmountain.collectionApp.entities.User;
 import com.devmountain.collectionApp.repositories.CollectionRepository;
 import com.devmountain.collectionApp.repositories.ItemRepository;
@@ -12,7 +9,9 @@ import com.devmountain.collectionApp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,12 +33,13 @@ public class CollectionServiceImpl implements CollectionService {
     //    add a collection
     @Override
     @Transactional
-    public void addCollection(CollectionDto collectionDto, Long userId) {
+    public CollectionDto addCollection(CollectionDto collectionDto, Long userId) {
         Optional<User> userOptional = userRepository.findById(userId);
         Collection collection = new Collection(collectionDto);
         userOptional.ifPresent(collection::setUser);
         collectionRepository.saveAndFlush(collection);
 
+        return collectionDto;
     }
 
     //    delete a collection
@@ -83,6 +83,15 @@ public class CollectionServiceImpl implements CollectionService {
         return Optional.empty();
     }
 
+//    @Override
+//    public Optional<CollectionDto> getImageById(Long collectionId){
+//        Optional<Collection> collectionOptional = collectionRepository.findById(collectionId);
+//        if (collectionOptional.isPresent()){
+//            return Optional.of(new CollectionDto((Collection) collectionOptional.get()));
+//        }
+//        return Optional.empty();
+//    }
+
     @Override
     public List<String> goToCollection(CollectionDto collectionDto){
         List<String> response = new ArrayList<>();
@@ -95,6 +104,48 @@ public class CollectionServiceImpl implements CollectionService {
         }
         return response;
     }
+//    @Override
+//    public CollectionDto save(CollectionDto collectionDto){
+//        Optional<Image> imageOptional = null;
+//        Collection collection = new Collection(collectionDto);
+//        imageOptional.ifPresent(collection::setImage);
+//        collectionRepository.saveAndFlush(collection);
+//
+//        return collectionDto;
+//    }
+
+
+//    @Override
+//    @Transactional
+//    public CollectionDto addCollection(Long userId, MultipartFile file, CollectionDto collectionDto) {
+//        Optional<User> userOptional = userRepository.findById(userId);
+//        Collection collection = new Collection(collectionDto);
+//
+//        byte[] bArray = null;
+//
+//
+//        try {
+//            bArray = new byte[file.getBytes().length];
+//            int i = 0;
+//            for(byte b : file.getBytes()){
+//                bArray[i++] = b;
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+//        CollectionDto collectionDto = new CollectionDto(name, bArray);
+//        collectionDto.setName(name);
+
+//        userOptional.ifPresent(collection::setUser);
+//        collection.setImage(bArray);
+//        userOptional.ifPresent(collection::setImage);
+//        collectionRepository.saveAndFlush(collection);
+
+//        return "redirect:/adminPage";
+//        return collectionDto;
+//    }
+
 
 }
 

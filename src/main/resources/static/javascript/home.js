@@ -4,9 +4,11 @@ const userId = cookieArr[1];
 const submitForm = document.getElementById("collection-form")
 const collectionContainer = document.getElementById("collection-container")
 const name = document.getElementById('collectionName-input')
+const image = document.getElementById('collectionImage-input')
 
 let itemBody = document.getElementsByClassName('item-body')
-let collectionBody = document.getElementById('collection-name')
+let collectionName = document.getElementById('collection-name')
+let collectionImage = document.getElementById('collection-image')
 let updateCollectionBtn = document.getElementById('update-collection-button')
 
 const headers = {
@@ -30,13 +32,15 @@ function handleLogout(){
 const handleSubmitCollection = async (e) => {
     e.preventDefault()
     let bodyObj = {
-        name: name.value
+        name: name.value,
+        image: image.value
 
 
     }
 
     await addCollection(bodyObj);
-    name.value = ''
+    name.value = '',
+    image.value = ''
 
 
 }
@@ -79,10 +83,12 @@ async function getCollectionById(collectionId){
 async function handleCollectionEdit(collectionId){
     let bodyObj = {
         id: collectionId,
-        name: collectionBody.value
+        name: collectionBody.value,
+        image: collectionImage.value
     }
     console.log(collectionId)
     console.log(collectionBody)
+    console.log(collectionImage.value)
 
     await fetch(baseUrlCollections, {
         method: "PUT",
@@ -114,7 +120,8 @@ const createNoteCards = (array) => {
             <div class="card d-flex" style="width: 18rem; height: 18rem;">
                                 <div class="card-body d-flex flex-column justify-content-between" style="height: available">
                                     <p class="card-text">${obj.name}</p>
-                                    <div class="d-flex justify-content-between">
+                                    <img class="card-img-top" src="${obj.image}" alt="Card image">
+                                    <div id="collection-btns" class="d-flex justify-content-between">
                                         <button class="btn btn-danger" onclick="handleDeleteCollection(${obj.id})">Delete</button>
                                          <button id="{${obj.id}" class="btn btn-primary" onclick="collectionSubmit(${obj.id})" type="button" >
                                         Select
@@ -132,8 +139,11 @@ const createNoteCards = (array) => {
 }
 
 const populateModal = (obj) => {
-    collectionBody.innerText = ''
-    collectionBody.innerText = obj.body
+    collectionName.innerText = ''
+    collectionImage.innerText = ''
+
+    collectionName.innerText = obj.name
+    collectionImage.innerText = obj.image
     updateCollectionBtn.setAttribute('data-collection-id', obj.id)
 }
 
@@ -160,28 +170,25 @@ async function getCollection(collectionId) {
 
 
 // collectionCard.addEventListener("submit",getCollection())
-let collectionId = document.getElementById("")
+// let collectionId = document.getElementById("")
 
-async function getCollectionId(id) {
-    await fetch(baseUrlCollections + collectionId, {
-        method: "GET",
-        headers: headers
-    })
-        .then (res => res.json())
-        .then (data => one(data))
-        .catch (err => console.error(err.message));
+// async function getCollectionId(id) {
+//     await fetch(baseUrlCollections + collectionId, {
+//         method: "GET",
+//         headers: headers
+//     })
+//         .then (res => res.json())
+//         .then (data => one(data))
+//         .catch (err => console.error(err.message));
+//
+//
+//     }
 
-
-    }
-
-const one = (obj) =>{
-    collectionId.setAttribute("collectionId", obj);
-
-}
-collectionId.addEventListener("submit",(e) => {
-    let collId = e.target.getAttribute("collectionId");
-    collectionSubmit(collId)
-})
+//
+// collectionId.addEventListener("submit",(e) => {
+//     let collId = e.target.getAttribute("collectionId");
+//     collectionSubmit(collId)
+// })
 
 
 
@@ -191,3 +198,25 @@ async function collectionSubmit(id) {
 
 }
 // collectionCard.addEventListener("submit",collectionSubmit)
+// function showImageThumbnail(fileInput){
+//     let file = fileInput.files[0];
+//     let reader = new FileReader();
+//
+//     reader.onload = function(e) {
+//        const thumbnail = document.getElementById('thumbnail')
+//         thumbnail.setAttribute('src', e.target.result);
+//     };
+//     reader.readAsDataURL(file)
+// }
+
+// document.ready(function (){
+//
+//     $('#image').change(function (){
+//         showImageThumbnail(this);
+//     })
+// })
+
+// const image = document.getElementById('image')
+// image.addEventListener('change', () => {
+//     showImageThumbnail(this);
+//     })

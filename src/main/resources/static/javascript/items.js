@@ -169,18 +169,18 @@ const createNoteCards = (array) => {
         itemCard.classList.add("m-2")
         itemCard.innerHTML = `
             <div class="card d-flex" style="width: 18rem; height: fit-content;">
-                                <div class="card-body d-flex flex-column justify-content-between" style="height: available">
-                                    <p class="card-text">${obj.name}</p>
-                                    <p class="card-text">${obj.brand}</p>
-                                    <p class="card-text">${obj.stock_photo}</p>
-                                    <p class="card-text">${obj.original_price}</p>
-                                    <p class="card-text">${obj.user_photo}</p>
-                                    <p class="card-text">${obj.amount_paid}</p>
-                                    <p class="card-text">${obj.date_acquired}</p>
-                                    <p class="card-text">${obj.current_value}</p>
-                                    <p class="card-text">${obj.current_location}</p>
-                                    <p class="card-text">${obj.keywords}</p>
-                                    <p class="card-text">${obj.notes}</p>
+                                <div class="card-body d-flex flex-column justify-content-between" style="height: available">                                
+                                    <h5 class="card-text">${obj.name}</h5>                                  
+                                    <img class="card-img-top" src="${obj.stock_photo}" alt="stock image">
+                                    <p class="card-text">Brand: ${obj.brand}</p>
+                                    <p class="card-text">Original Price: ${obj.original_price}</p>
+                                    <img class="card-img-top" src="${obj.user_photo}" alt="stock image">
+                                    <p class="card-text">Amount Paid: ${obj.amount_paid}</p>
+                                    <p class="card-text">Date Acquired: ${obj.date_acquired}</p>
+                                    <p class="card-text">Current Value: ${obj.current_value}</p>
+                                    <p class="card-text">Current Location: ${obj.current_location}</p>
+                                    <p class="card-text">Kaywords: ${obj.keywords}</p>
+                                    <p class="card-text">Notes: ${obj.notes}</p>
                                     <div class="d-flex justify-content-between">
                                         <button class="btn btn-danger" onclick="handleDeleteItem(${obj.id})">Delete</button>
                                         <button onclick="getItemById(${obj.id})" type="button" class="btn btn-primary"
