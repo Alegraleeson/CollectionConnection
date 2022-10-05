@@ -1,6 +1,5 @@
-
 const userId = getCookie("userId")
-const collectionId = getCookie("collectionId")
+const wishlistId = getCookie("wishlistId")
 
 const submitForm = document.getElementById("item-form")
 const itemContainer = document.getElementById("item-container")
@@ -8,27 +7,21 @@ const name = document.getElementById('itemItemName-input')
 const brand = document.getElementById('itemItemBrand-input')
 const stockPhoto = document.getElementById('itemItemStockPhoto-input')
 const originalPrice = document.getElementById('itemItemOriginalPrice-input')
-const userPhoto = document.getElementById('itemUserPhoto-input')
-const boughtPrice = document.getElementById('itemBoughtPrice-input')
-const dateAcquired = document.getElementById('itemDateAcquired-input')
-const currentValue = document.getElementById('itemCurrentValue-input')
+const currentValue = document.getElementById('itemItemCurrentValue-input')
 const keywords = document.getElementById('itemItemKeywords-input')
 const notes = document.getElementById('itemItemNotes-input')
-const currentLocation = document.getElementById('itemCurrentValue-input')
+
 const itemSelect = document.getElementById('itemName-select')
 
 
-let collectionName = document.getElementById("collection-name")
+let wishlistName = document.getElementById("wishlist-name")
 
 let itemName = document.getElementById("item-name" )
 let itemBrand = document.getElementById("item-brand" )
 let itemStockPhoto = document.getElementById("item-stockPhoto")
 let itemOriginalPrice = document.getElementById("item-originalPrice")
-let itemUserPhoto = document.getElementById("item-userPhoto")
-let itemBoughtPrice = document.getElementById("item-boughtPrice")
-let itemDateAcquired = document.getElementById("item-dateAcquired")
 let itemCurrentValue = document.getElementById("item-currentValue")
-let itemCurrentLocation = document.getElementById("item-currentLocation")
+let itemUserPhoto = document.getElementById("item-userPhoto")
 let itemKeywords = document.getElementById("item-keywords")
 let itemNotes = document.getElementById("item-notes")
 
@@ -40,7 +33,7 @@ const headers = {
 
 }
 
-const baseUrlCollections = "http://localhost:8080/api/v1/collections/"
+const baseUrlWishlists = "http://localhost:8080/api/v1/wishlists/"
 const baseUrlItems = "http://localhost:8080/api/v1/items/"
 
 function handleLogout(){
@@ -55,37 +48,29 @@ const handleSubmitItem = async (e) => {
     e.preventDefault()
     let bodyObj = {
         user_id: userId,
-        collection_id: collectionId,
+        wishlist_id: wishlistId,
         name: name.value,
         brand: brand.value,
         stock_photo: stockPhoto.value,
         original_price: originalPrice.value,
-        user_photo: userPhoto.value,
-        amount_paid: boughtPrice.value,
-        date_acquired: dateAcquired.value,
-        current_location: currentLocation.value,
         current_value: currentValue.value,
         keywords: keywords.value,
         notes: notes.value
 
     }
-    await addItem(bodyObj);
+    await addWishItem(bodyObj);
     name.value = ''
     brand.value = ''
     stockPhoto.value = ''
     originalPrice.value = ''
-    userPhoto.value = ''
-    boughtPrice.value = ''
-    dateAcquired.value = ''
-    currentLocation.value = ''
     currentValue.value = ''
     keywords.value = ''
     notes.value = ''
 
 }
 
-async function addItem(obj) {
-    const response = await fetch(`${baseUrlItems}collections/${collectionId}/${userId}`, {
+async function addWishItem(obj) {
+    const response = await fetch(`${baseUrlItems}wishlists/${wishlistId}/${userId}`, {
         method: "POST",
         body: JSON.stringify(obj),
         headers: headers
@@ -93,19 +78,19 @@ async function addItem(obj) {
     })
         .catch(err => console.error(err.message))
     if (response.status == 200) {
-        return getItems(collectionId);
+        return getItemsByWishlistId(wishlistId);
     }
 
 }
 
 
-async function getItems(collectionId){
-    await fetch(`${baseUrlItems}from/${collectionId}`, {
-    method: "GET",
+async function getItemsByWishlistId(wishlistId){
+    await fetch(`${baseUrlItems}wishlists/${wishlistId}`, {
+        method: "GET",
         headers: headers
     })
         .then(response => response.json())
-        .then(data => createNoteCards(data))
+       .then(data => createNoteCards(data))
         .catch(err => console.error(err))
 }
 
@@ -129,10 +114,6 @@ async function handleItemEdit(itemId){
         brand: itemBrand.value,
         stock_photo: itemStockPhoto.value,
         original_price: itemOriginalPrice.value,
-        user_photo: itemUserPhoto.value,
-        amount_paid: itemBoughtPrice.value,
-        date_acquired: itemDateAcquired.value,
-        current_location: itemCurrentLocation.value,
         current_value: itemCurrentValue.value,
         keywords: itemKeywords.value,
         notes: itemNotes.value    }
@@ -144,7 +125,7 @@ async function handleItemEdit(itemId){
     })
         .catch(err => console.error(err))
 
-    return getItems(collectionId);
+    return getItemById(wishlistId);
 
 }
 
@@ -158,29 +139,23 @@ async function handleDeleteItem(itemId){
 
         .catch(err => console.error(err))
 
-    return getItems(collectionId);
+    return getItemById(wishlistId);
 }
 
 
 const createNoteCards = (array) => {
     itemContainer.innerHTML = ''
-
     array.forEach(obj => {
         let itemCard = document.createElement("div")
         itemCard.classList.add("m-2")
-        const itemDate = new Date(obj.date_acquired).toLocaleDateString('en-US', { timeZone: 'UTC' })
         itemCard.innerHTML = `
             <div class="card d-flex" style="width: 18rem; height: fit-content;">
                                 <div class="card-body d-flex flex-column justify-content-between" style="height: available">                                
                                     <h5 class="card-text">${obj.name}</h5>                                  
                                     <img class="card-img-top" src="${obj.stock_photo}" alt="stock image">
                                     <p class="card-text">Brand: ${obj.brand}</p>
-                                    <p class="card-text">Original Price: ${obj.original_price}</p>
-                                    <img class="card-img-top" src="${obj.user_photo}" alt="stock image">
-                                    <p class="card-text">Amount Paid: ${obj.amount_paid}</p>
-                                    <p class="card-text">Date Acquired: ${itemDate}</p>
-                                    <p class="card-text">Current Value: ${obj.current_value}</p>
-                                    <p class="card-text">Current Location: ${obj.current_location}</p>
+                                    <p class="card-text">Original Price: ${obj.original_price}</p>                         
+                                    <p class="card-text">Current Value: ${obj.current_value}</p>                                    
                                     <p class="card-text">Kaywords: ${obj.keywords}</p>
                                     <p class="card-text">Notes: ${obj.notes}</p>
                                     <div class="d-flex justify-content-between">
@@ -204,9 +179,6 @@ const populateModal = (obj) => {
     itemBrand.innerText = ''
     itemStockPhoto.innerText = ''
     itemOriginalPrice.innerText = ''
-    itemUserPhoto.innerText = ''
-    itemBoughtPrice.innerText = ''
-    itemDateAcquired.innerText = ''
     itemCurrentValue.innerText = ''
     itemKeywords.innerText = ''
     itemNotes.innerText = ''
@@ -215,9 +187,6 @@ const populateModal = (obj) => {
     itemBrand.innerText = obj.brand
     itemStockPhoto.innerText = obj.stock_photo
     itemOriginalPrice.innerText = obj.original_price
-    itemUserPhoto.innerText = obj.user_photo
-    itemBoughtPrice.innerText = obj.amount_paid
-    itemDateAcquired.innerText = obj.date_acquired
     itemCurrentValue.innerText = obj.current_value
     itemKeywords.innerText = obj.keywords
     itemNotes.innerText = obj.notes
@@ -226,7 +195,7 @@ const populateModal = (obj) => {
 }
 
 
-getItems(collectionId);
+getItemsByWishlistId(wishlistId);
 
 submitForm.addEventListener("submit", handleSubmitItem)
 
@@ -246,6 +215,3 @@ function getCookie(name) {
     }
     return null;
 }
-
-
-

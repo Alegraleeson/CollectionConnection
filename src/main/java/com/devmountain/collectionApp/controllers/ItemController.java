@@ -1,14 +1,8 @@
 package com.devmountain.collectionApp.controllers;
 
-import com.devmountain.collectionApp.dtos.CollectionDto;
 import com.devmountain.collectionApp.dtos.ItemDto;
-import com.devmountain.collectionApp.entities.Collection;
-import com.devmountain.collectionApp.entities.Item;
 import com.devmountain.collectionApp.services.CollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.devmountain.collectionApp.services.ItemService;
 
@@ -35,10 +29,25 @@ public class ItemController {
             return none;
     }
 
+    @GetMapping("/wishlists/{wishlistId}")
+    public List<ItemDto> getItemsByWishlistId(@PathVariable Long wishlistId){
+        List<ItemDto> wishlistOptional = itemService.getAllItemsByWishlistId(wishlistId);
+        List<ItemDto> none = new ArrayList<>();
+        if(!wishlistOptional.isEmpty()){
+            return wishlistOptional;
+        }
+        return none;
+    }
+
     //    add a new item
     @PostMapping("/collections/{collectionId}/{userId}")
     public void addItem(@RequestBody ItemDto itemDto,@PathVariable Long collectionId, @PathVariable Long userId){
         itemService.addItem(itemDto, userId, collectionId);
+    }
+
+    @PostMapping("/wishlists/{wishlistId}/{userId}")
+    public void addWishItem(@RequestBody ItemDto itemDto,@PathVariable Long wishlistId, @PathVariable Long userId){
+        itemService.addWishItem(itemDto, userId, wishlistId);
     }
 
     @DeleteMapping("/{itemId}")

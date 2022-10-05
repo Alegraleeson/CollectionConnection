@@ -34,6 +34,8 @@ public class ItemDto implements Serializable {
 
     private CollectionDto collectionDto;
 
+    private WishlistDto wishlistDto;
+
     public ItemDto(Item item){
         if(item.getId() != null){
             this.id = item.getId();

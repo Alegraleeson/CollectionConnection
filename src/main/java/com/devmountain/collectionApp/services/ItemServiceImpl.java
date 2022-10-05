@@ -4,10 +4,12 @@ import com.devmountain.collectionApp.dtos.ItemDto;
 import com.devmountain.collectionApp.entities.Collection;
 import com.devmountain.collectionApp.entities.Item;
 import com.devmountain.collectionApp.entities.User;
+import com.devmountain.collectionApp.entities.Wishlist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.devmountain.collectionApp.repositories.CollectionRepository;
+import com.devmountain.collectionApp.repositories.WishlistRepository;
 import com.devmountain.collectionApp.repositories.ItemRepository;
 import com.devmountain.collectionApp.repositories.UserRepository;
 
@@ -25,6 +27,9 @@ public class ItemServiceImpl implements ItemService {
     private CollectionRepository collectionRepository;
 
     @Autowired
+    private WishlistRepository wishlistRepository;
+
+    @Autowired
     private ItemRepository itemRepository;
 
     //    adding an item
@@ -36,6 +41,18 @@ public class ItemServiceImpl implements ItemService {
         Item item = new Item(itemDto);
         userOptional.ifPresent(item::setUser);
         collectionOptional.ifPresent(item::setCollection);
+        itemRepository.saveAndFlush(item);
+
+    }
+
+    @Override
+    @Transactional
+    public void addWishItem(ItemDto itemDto, Long userId, Long wishlistId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        Optional<Wishlist> wishlistOptional = wishlistRepository.findById(wishlistId);
+        Item item = new Item(itemDto);
+        userOptional.ifPresent(item::setUser);
+        wishlistOptional.ifPresent(item::setWishlist);
         itemRepository.saveAndFlush(item);
 
     }
@@ -75,6 +92,17 @@ public class ItemServiceImpl implements ItemService {
         Optional<Collection> collectionOptional = collectionRepository.findById(collectionId);
         if (collectionOptional.isPresent()){
             List<Item> itemList = itemRepository.findAllByCollectionEquals(collectionOptional.get());
+            return itemList.stream().map(item -> new ItemDto(item)).collect(Collectors.toList());
+        }
+
+        return Collections.emptyList();
+    }
+
+    @Override
+    public List<ItemDto> getAllItemsByWishlistId(Long wishlistId){
+        Optional<Wishlist> wishlistOptional = wishlistRepository.findById(wishlistId);
+        if (wishlistOptional.isPresent()){
+            List<Item> itemList = itemRepository.findAllByWishlistEquals(wishlistOptional.get());
             return itemList.stream().map(item -> new ItemDto(item)).collect(Collectors.toList());
         }
 

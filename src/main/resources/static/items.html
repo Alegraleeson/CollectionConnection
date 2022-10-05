@@ -8,6 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/baseStyle.css" type="text/css">
   <link rel="stylesheet" href="./css/items.css" type="text/css">
   <title>Items</title>
 </head>
@@ -15,37 +16,46 @@
 
 <a class="btn btn-danger navbar-btn" href="./login.html" onclick="handleLogout()">Logout</a>
 <a class="btn btn-danger navbar-btn" href="./home.html" >Collections</a>
-<h1>Items</h1>
+<a class="btn btn-danger navbar-btn" href="./wishlists.html" >Wishlists</a>
+<a href="./index.html"><h1>Collection Connection</h1></a>p
 
-<div class="container" id="items-container">
-  <div id="item-form-container">
-    <form id="item-form" style="max-width: 400px;">
+<div class="fluid-container" id="items-container">
+  <div id="item-form-container" class="container-md">
+    <form id="item-form">
         <h4 class="form-title" id="item-form-title">Add A New Item</h4>
-      <div class="form-group">
-        <label for="itemItemName-input">Item Name</label>
-        <textarea class="form-control" id="itemItemName-input" class="item-input" placeholder="Item Name" rows="1"></textarea>
-        <label for="itemItemBrand-input">Brand</label>
-        <textarea class="form-control" id="itemItemBrand-input" class="item-input" placeholder="Brand" rows="1"></textarea>
-        <label for="itemItemStockPhoto-input">Stock Photo</label>
-        <textarea class="form-control" id="itemItemStockPhoto-input" class="item-input" placeholder="Stock Photo" rows="1"></textarea>
-        <label for="itemItemOriginalPrice-input">Original Price</label>
-        <textarea class="form-control" id="itemItemOriginalPrice-input" class="item-input" placeholder="Original Price" rows="1"></textarea>
-        <label for="itemUserPhoto-input">User Photo</label>
-        <textarea class="form-control" id="itemUserPhoto-input" class="item-input" placeholder="User Photo" rows="1"></textarea>
-        <label for="itemBoughtPrice-input">Bought Price</label>
-        <textarea class="form-control" id="itemBoughtPrice-input" class="item-input" placeholder="Price Paid" rows="1"></textarea>
-        <label for="itemDateAcquired-input">Date Acquired</label>
-        <input type="date" class="form-control" id="itemDateAcquired-input" class="item-input" placeholder="YYYY-MM-DD" rows="1"></input>
-        <label for="itemCurrentLocation-input">Current Location</label>
-        <textarea class="form-control" id="itemCurrentLocation-input" class="item-input" placeholder="Current Location" rows="1"></textarea>
-        <label for="itemCurrentValue-input">Current Estimated Value</label>
-        <textarea class="form-control" id="itemCurrentValue-input" class="item-input" placeholder="Current Estimated Value" rows="1"></textarea>
-        <label for="itemItemKeywords-input">Keywords</label>
-        <textarea class="form-control" id="itemItemKeywords-input" class="item-input" placeholder="Keywords" rows="1"></textarea>
-        <label for="itemItemNotes-input">Notes</label>
-        <textarea class="form-control" id="itemItemNotes-input" class="item-input" placeholder="Notes" rows="5"></textarea>
+      <div class="form-group row">
+        <div class="col">
+          <label for="itemItemName-input">Item Name</label>
+          <textarea class="form-control" id="itemItemName-input" class="item-input" placeholder="Item Name" rows="1"></textarea>
+          <label for="itemItemBrand-input">Brand</label>
+          <textarea class="form-control" id="itemItemBrand-input" class="item-input" placeholder="Brand" rows="1"></textarea>
+          <label for="itemItemStockPhoto-input">Stock Photo</label>
+          <textarea class="form-control" id="itemItemStockPhoto-input" class="item-input" placeholder="Stock Photo" rows="1"></textarea>
+          <label for="itemItemOriginalPrice-input">Original Price</label>
+          <textarea class="form-control" id="itemItemOriginalPrice-input" class="item-input" placeholder="Original Price" rows="1"></textarea>
+          <label for="itemUserPhoto-input">User Photo</label>
+          <textarea class="form-control" id="itemUserPhoto-input" class="item-input" placeholder="User Photo" rows="1"></textarea>
+          <label for="itemBoughtPrice-input">Bought Price</label>
+          <textarea class="form-control" id="itemBoughtPrice-input" class="item-input" placeholder="Price Paid" rows="1"></textarea>
+        </div>
+        <div class="col">
+          <label for="itemDateAcquired-input">Date Acquired</label>
+          <input type="date" class="form-control" id="itemDateAcquired-input" class="item-input" placeholder="YYYY-MM-DD" rows="1"></input>
+          <label for="itemCurrentLocation-input">Current Location</label>
+          <textarea class="form-control" id="itemCurrentLocation-input" class="item-input" placeholder="Current Location" rows="1"></textarea>
+          <label for="itemCurrentValue-input">Current Estimated Value</label>
+          <textarea class="form-control" id="itemCurrentValue-input" class="item-input" placeholder="Current Estimated Value" rows="1"></textarea>
+          <label for="itemItemKeywords-input">Keywords</label>
+          <textarea class="form-control" id="itemItemKeywords-input" class="item-input" placeholder="Keywords" rows="1"></textarea>
+          <label for="itemItemNotes-input">Notes</label>
+          <textarea class="form-control" id="itemItemNotes-input" class="item-input" placeholder="Notes" rows="5"></textarea>
+        </div>
+
       </div>
-      <button id="submit-button" type="submit" class="btn btn-primary mt-1">Submit</button>
+      <div id="submit-button-container">
+        <button id="submit-button" type="submit" class="btn btn-primary mt-1">Submit</button>
+      </div>
+
     </form>
 
     <div id="item-container" class="container-fluid"></div>

@@ -60,6 +60,10 @@ public class Item {
     @JsonBackReference
     private Collection collection;
 
+    @ManyToOne
+    @JsonBackReference
+    private Wishlist wishlist;
+
 
 
     public Item(ItemDto itemDto){

@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Permanent+Marker&display=swap');
 
-body {
-    background-image: url("../images/erol-ahmed-Y3KEBQlB1Zk-unsplash.jpg");
-    background-size: cover;
-    font-family: 'Permanent Marker', cursive;
-}
 
 #collection-form-container {
     display: flex;
@@ -14,15 +9,6 @@ body {
 
 }
 
-h1 {
-    background-image: url("../images/olga-thelavart-vS3idIiYxX0-unsplash.jpg");
-    background-size: cover;
-    /*display: inline-block;*/
-    opacity: 90%;
-    margin-top: 25px;
-    font-family: 'Permanent Marker', cursive;
-    text-align: center;
-}
 
 #collection-form-title {
     /*background-image: url("../images/olga-thelavart-vS3idIiYxX0-unsplash.jpg");*/
@@ -73,9 +59,7 @@ label, textarea {
 }
 
 button {
-    background-image: url("../images/katie-harp-oZgj_nQQvuo-unsplash.jpg");
-    background-size: cover;
-    margin-top: 10px;
+    margin: 10px 0px 0px 0px;
 }
 
 .modal-body {

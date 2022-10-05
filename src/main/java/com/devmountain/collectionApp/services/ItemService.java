@@ -11,6 +11,9 @@ public interface ItemService {
     @Transactional
     void addItem(ItemDto itemDto, Long userId, Long collectionId);
 
+    @Transactional
+    void addWishItem(ItemDto itemDto, Long userId, Long wishlistId);
+
     //    delete an item
     @Transactional
     void deleteItemById(Long itemId);
@@ -22,6 +25,8 @@ public interface ItemService {
     //    find all items by collection
     @Transactional
     List<ItemDto> getAllItemsByCollectionId(Long collectionId);
+
+    List<ItemDto> getAllItemsByWishlistId(Long wishlistId);
 
     //    get a item by item id
     @Transactional

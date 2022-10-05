@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/baseStyle.css" type="text/css">
+  <link rel="stylesheet" href="./css/wishlists.css" type="text/css">
+  <title>Home</title>
+</head>
+<body>
+
+<a class="btn btn-danger navbar-btn" href="./login.html" onclick="handleLogout()">Logout</a>
+<a class="btn btn-danger navbar-btn" href="./home.html" >Collections</a>
+<a href="./index.html"><h1>Collection Connection</h1></a>
+
+<div class="container" id="home-container">
+
+  <div id="wishlist-form-container">
+
+    <form id="wishlist-form" enctype="multipart/form-data">
+      <h4 class="form-title" id="wishlist-form-title">Add A New Wishlist</h4>
+      <div class="form-group">
+        <label for="wishlistName-input">Wishlist Name</label>
+        <textarea class="form-control" id="wishlistName-input" class="item-input" placeholder="Wishlist Name" rows="1"></textarea>
+        <label for="wishlistImage-input">Wishlist Image</label>
+        <textarea class="form-control" id="wishlistImage-input" class="item-input" placeholder="Image URL" rows="1"></textarea>
+        <!--                <input type="file" name="image" id="wishlistPhoto-input" accept="image/png, image/jpeg"/>-->
+        <!--                <img id="thumbnail" alt="Wishlist Image">-->
+
+      </div>
+      <div id="submit-container".>
+        <button id="submit-button" type="submit" class="btn btn-primary mt-1">Submit</button>
+      </div>
+
+    </form>
+    <div id="wishlist-container" class="container-fluid"></div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="wishlist-edit-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="wishlist-edit-modal-title" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="wishlist-edit-modal-title">Edit Wishlist</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex" >
+        <label for="wishlist-name">Wishlist Name</label><br>
+        <textarea class="form-control" id="wishlist-name" class="wishlist-body" rows="1"></textarea><br>
+        <label for="wishlist-image">Wishlist Image</label><br>
+        <textarea class="form-control" id="wishlist-image" class="item-input" placeholder="Image URL" rows="1"></textarea>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" id="update-wishlist-button" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script src="./javascript/wishlists.js" type="application/javascript"></script>
+</body>
+</html>
