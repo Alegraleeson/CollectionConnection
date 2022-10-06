@@ -14,14 +14,21 @@
 </head>
 <body>
 
-<a class="btn btn-danger navbar-btn" href="./login.html" onclick="handleLogout()">Logout</a>
-<a class="btn btn-danger navbar-btn" href="./home.html" >Collections</a>
-<a class="btn btn-danger navbar-btn" href="./wishlists.html" >Wishlists</a>
+<div id="navbar" class="dropdown">
+  <button class="dropbtn">Menu</button>
+  <div class="dropdown-content">
+    <a class="btn btn-danger navbar-btn" href="./login.html" onclick="handleLogout()">Logout</a>
+    <a class="btn btn-danger navbar-btn" href="./home.html" >Collections</a>
+    <a class="btn btn-danger navbar-btn" href="./wishlists.html" >Wishlists</a>
+    <a class="btn btn-danger navbar-btn" href="./allItems.html" >View All Items</a>
+  </div>
+</div>
+
 <a href="./index.html"><h1>Collection Connection</h1></a>p
 
 <div class="fluid-container" id="items-container">
-  <div id="item-form-container" class="container-md">
-    <form id="item-form">
+  <div id="item-form-container" class="row" style="margin-top: 20px;">
+    <form id="item-form" class="col align-self-center" style="max-width: 54rem;">
         <h4 class="form-title" id="item-form-title">Add A New Item</h4>
       <div class="form-group row">
         <div class="col">

@@ -119,4 +119,13 @@ public class ItemServiceImpl implements ItemService {
         return Optional.empty();
     }
 
+    @Override
+    public List<ItemDto> getAllItemsByUserId(Long userId){
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isPresent()){
+            List<Item> itemList = itemRepository.findAllByUserEquals(userOptional.get());
+            return itemList.stream().map(item -> new ItemDto(item)).collect(Collectors.toList());
+        }
+        return Collections.emptyList();
+    }
 }

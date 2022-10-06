@@ -1,6 +1,7 @@
 package com.devmountain.collectionApp.services;
 
 import com.devmountain.collectionApp.dtos.ItemDto;
+import com.devmountain.collectionApp.entities.Item;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -31,4 +32,7 @@ public interface ItemService {
     //    get a item by item id
     @Transactional
     Optional<ItemDto> getItemById(Long itemId);
+
+    //    find all items by user
+    List<ItemDto> getAllItemsByUserId(Long userId);
 }

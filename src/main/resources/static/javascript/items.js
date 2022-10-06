@@ -14,7 +14,7 @@ const dateAcquired = document.getElementById('itemDateAcquired-input')
 const currentValue = document.getElementById('itemCurrentValue-input')
 const keywords = document.getElementById('itemItemKeywords-input')
 const notes = document.getElementById('itemItemNotes-input')
-const currentLocation = document.getElementById('itemCurrentValue-input')
+const currentLocation = document.getElementById('itemCurrentLocation-input')
 const itemSelect = document.getElementById('itemName-select')
 
 
@@ -172,20 +172,20 @@ const createNoteCards = (array) => {
         itemCard.innerHTML = `
             <div class="card d-flex" style="width: 18rem; height: fit-content;">
                                 <div class="card-body d-flex flex-column justify-content-between" style="height: available">                                
-                                    <h5 class="card-text">${obj.name}</h5>                                  
-                                    <img class="card-img-top" src="${obj.stock_photo}" alt="stock image">
+                                    <p id="card-name" class="card-text">${obj.name}</p>                                  
+                                    <img class="card-img-top" src="${obj.stock_photo}" alt="stock image">                               
                                     <p class="card-text">Brand: ${obj.brand}</p>
                                     <p class="card-text">Original Price: ${obj.original_price}</p>
-                                    <img class="card-img-top" src="${obj.user_photo}" alt="stock image">
+                                    <img class="card-img-top" src="${obj.user_photo}" alt="stock image">                                    
                                     <p class="card-text">Amount Paid: ${obj.amount_paid}</p>
                                     <p class="card-text">Date Acquired: ${itemDate}</p>
                                     <p class="card-text">Current Value: ${obj.current_value}</p>
                                     <p class="card-text">Current Location: ${obj.current_location}</p>
-                                    <p class="card-text">Kaywords: ${obj.keywords}</p>
+                                    <p class="card-text">Keywords: ${obj.keywords}</p>
                                     <p class="card-text">Notes: ${obj.notes}</p>
                                     <div class="d-flex justify-content-between">
-                                        <button class="btn btn-danger" onclick="handleDeleteItem(${obj.id})">Delete</button>
-                                        <button onclick="getItemById(${obj.id})" type="button" class="btn btn-primary"
+                                        <button class="btn btn-danger bold" onclick="handleDeleteItem(${obj.id})">Delete</button>
+                                        <button onclick="getItemById(${obj.id})" type="button" class="btn btn-primary bold"
                                         data-bs-toggle="modal" data-bs-target="#item-edit-modal">
                                         Edit
                                         </button>

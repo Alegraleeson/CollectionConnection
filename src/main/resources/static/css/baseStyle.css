@@ -8,6 +8,11 @@ body {
     font-family: 'Permanent Marker', cursive;
     padding: 50px 50px 50px 50px;
     letter-spacing: 1px;
+    color: black;
+}
+
+.dropbtn {
+    display: none;
 }
 
 h1 {
@@ -33,9 +38,69 @@ button {
     background-image: url("../images/katie-harp-oZgj_nQQvuo-unsplash.jpg");
     background-size: cover;
     margin: 10px 10px 10px 10px;
+    letter-spacing: 1px;
+    color: black;
 }
 
 .btn {
     background-image: url("../images/katie-harp-oZgj_nQQvuo-unsplash.jpg");
     background-size: cover;
+    letter-spacing: 1px;
+    color: black;
+}
+
+#update-item-button, #close-item-button, #item-edit-button, #item-delete-button, .bold {
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 589px) {
+
+    /* Style The Dropdown Button */
+    .dropbtn {
+        background-color: #4CAF50;
+        /*color: white;*/
+        /*padding: 16px;*/
+        margin-bottom: 0px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        display: block;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #f1f1f1}
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
 }

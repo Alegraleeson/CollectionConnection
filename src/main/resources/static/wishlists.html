@@ -14,15 +14,23 @@
 </head>
 <body>
 
-<a class="btn btn-danger navbar-btn" href="./login.html" onclick="handleLogout()">Logout</a>
-<a class="btn btn-danger navbar-btn" href="./home.html" >Collections</a>
+<div id="navbar" class="dropdown">
+  <button class="dropbtn">Menu</button>
+  <div class="dropdown-content">
+    <a class="btn btn-danger navbar-btn" href="./login.html" onclick="handleLogout()">Logout</a>
+    <a class="btn btn-danger navbar-btn" href="./home.html" >Collections</a>
+    <a class="btn btn-danger navbar-btn" href="./wishlists.html" >Wishlists</a>
+    <a class="btn btn-danger navbar-btn" href="./allItems.html" >View All Items</a>
+  </div>
+</div>
+
 <a href="./index.html"><h1>Collection Connection</h1></a>
 
 <div class="container" id="home-container">
 
-  <div id="wishlist-form-container">
+  <div id="wishlist-form-container" class="row">
 
-    <form id="wishlist-form" enctype="multipart/form-data">
+    <form id="wishlist-form" enctype="multipart/form-data" class="col-7 align-self-center" >
       <h4 class="form-title" id="wishlist-form-title">Add A New Wishlist</h4>
       <div class="form-group">
         <label for="wishlistName-input">Wishlist Name</label>

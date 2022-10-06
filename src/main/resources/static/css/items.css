@@ -5,8 +5,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-
+    margin: 50px 0 50px 0;
 }
 
 #item-form-title {
@@ -43,12 +42,20 @@ label, textarea {
     margin-top: 10px;
 }
 
+#card-name {
+    font-weight: bold;
+    text-align: center;
+}
 
 .card-body {
     background-image: url("../images/kiwihug-cqhXfrRHCPo-unsplash.jpg");
     background-size: cover;
     font-family: 'IBM Plex Mono', monospace;
     font-weight: bold;
+}
+
+.card-img-top {
+    margin-bottom: 20px;
 }
 
 #item-container {

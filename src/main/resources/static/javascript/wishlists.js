@@ -119,14 +119,14 @@ const createNoteCards = (array) => {
         wishlistCard.innerHTML = `
             <div class="card d-flex" style="width: 18rem; height: 18rem;">
                                 <div class="card-body d-flex flex-column justify-content-between" style="height: available">
-                                    <p class="card-text">${obj.name}</p>
+                                    <p id="card-name" class="card-text">${obj.name}</p>
                                     <img class="card-img-top" src="${obj.image}" alt="Card image">
                                     <div id="wishlist-btns" class="d-flex justify-content-between">
-                                        <button class="btn btn-danger" onclick="handleDeleteWishlist(${obj.id})">Delete</button>
-                                         <button id="{${obj.id}" class="btn btn-primary" onclick="wishlistSubmit(${obj.id})" type="button" >
+                                        <button id="item-delete-button" class="btn btn-danger" onclick="handleDeleteWishlist(${obj.id})">Delete</button>
+                                         <button id="{${obj.id}" class="btn btn-primary bold" onclick="wishlistSubmit(${obj.id})" type="button" >
                                         Select
                                         </button>
-                                        <button onclick="getWishlistById(${obj.id})" type="button" class="btn btn-primary"
+                                        <button onclick="getWishlistById(${obj.id})" type="button" id="item-edit-button" class="btn btn-primary"
                                         data-bs-toggle="modal" data-bs-target="#wishlist-edit-modal">
                                         Edit
                                         </button>

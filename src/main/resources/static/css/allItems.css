@@ -1,0 +1,49 @@
+#form-container {
+    display: flex;
+    justify-content: center;
+}
+
+#search-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.container-md{
+    background-image: url("../images/kiwihug-cqhXfrRHCPo-unsplash.jpg");
+    background-size: cover;
+    max-width: 600px;
+    margin: 40px 0px 50px 0px;
+
+
+
+}
+
+.mt-1{
+    display: flex;
+    justify-content: center;
+    /*margin: 10px 0px 10px 0px;*/
+}
+
+.card-body {
+    background-image: url("../images/kiwihug-cqhXfrRHCPo-unsplash.jpg");
+    background-size: cover;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: bold;
+}
+
+#card-name {
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-img-top {
+    margin-bottom: 20px;
+}
+
+
+.modal-content {
+    background-image: url("../images/kiwihug-cqhXfrRHCPo-unsplash.jpg");
+    background-size: cover;
+}
+

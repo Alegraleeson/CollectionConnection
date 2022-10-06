@@ -13,22 +13,28 @@
     <title>Home</title>
 </head>
 <body>
-
-<a class="btn btn-danger navbar-btn" href="./login.html" onclick="handleLogout()">Logout</a>
-<a class="btn btn-danger navbar-btn" href="./wishlists.html" >Wishlists</a>
+<div id="navbar" class="dropdown">
+    <button class="dropbtn">Menu</button>
+    <div class="dropdown-content">
+        <a class="btn btn-danger navbar-btn" href="./login.html" onclick="handleLogout()">Logout</a>
+        <a class="btn btn-danger navbar-btn" href="./home.html" >Collections</a>
+        <a class="btn btn-danger navbar-btn" href="./wishlists.html" >Wishlists</a>
+        <a class="btn btn-danger navbar-btn" href="./allItems.html" >View All Items</a>
+    </div>
+</div>
 <a href="./index.html"><h1>Collection Connection</h1></a>
 
-<div class="container" id="home-container">
+<div id="home-container">
 
-    <div id="collection-form-container">
+    <div id="collection-form-container" class="row">
 
-        <form id="collection-form" enctype="multipart/form-data">
+        <form id="collection-form" class="col-7 align-self-center" enctype=multipart/form-data">
             <h4 class="form-title" id="collection-form-title">Add A New Collection</h4>
             <div class="form-group">
                 <label for="collectionName-input">Collection Name</label>
-                <textarea class="form-control" id="collectionName-input" class="item-input" placeholder="Collection Name" rows="1"></textarea>
+                <textarea class="form-control" id="collectionName-input" class="item-input" placeholder="Enter Here" rows="1"></textarea>
                 <label for="collectionImage-input">Collection Image</label>
-                <textarea class="form-control" id="collectionImage-input" class="item-input" placeholder="Image URL" rows="1"></textarea>
+                <textarea class="form-control" id="collectionImage-input" class="item-input" placeholder="Enter URL" rows="1"></textarea>
 <!--                <input type="file" name="image" id="collectionPhoto-input" accept="image/png, image/jpeg"/>-->
 <!--                <img id="thumbnail" alt="Collection Image">-->
 

@@ -151,16 +151,17 @@ const createNoteCards = (array) => {
         itemCard.innerHTML = `
             <div class="card d-flex" style="width: 18rem; height: fit-content;">
                                 <div class="card-body d-flex flex-column justify-content-between" style="height: available">                                
-                                    <h5 class="card-text">${obj.name}</h5>                                  
+                                    <p id="card-name" class="card-text">${obj.name}</p>                                  
                                     <img class="card-img-top" src="${obj.stock_photo}" alt="stock image">
+                                    <br>
                                     <p class="card-text">Brand: ${obj.brand}</p>
                                     <p class="card-text">Original Price: ${obj.original_price}</p>                         
                                     <p class="card-text">Current Value: ${obj.current_value}</p>                                    
-                                    <p class="card-text">Kaywords: ${obj.keywords}</p>
+                                    <p class="card-text">Keywords: ${obj.keywords}</p>
                                     <p class="card-text">Notes: ${obj.notes}</p>
                                     <div class="d-flex justify-content-between">
-                                        <button class="btn btn-danger" onclick="handleDeleteItem(${obj.id})">Delete</button>
-                                        <button onclick="getItemById(${obj.id})" type="button" class="btn btn-primary"
+                                        <button class="btn btn-danger bold" onclick="handleDeleteItem(${obj.id})">Delete</button>
+                                        <button onclick="getItemById(${obj.id})" type="button" class="btn btn-primary bold"
                                         data-bs-toggle="modal" data-bs-target="#item-edit-modal">
                                         Edit
                                         </button>

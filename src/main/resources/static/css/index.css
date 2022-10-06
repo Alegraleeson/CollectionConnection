@@ -21,8 +21,10 @@ a {
 }
 
 p {
+    font-family: 'IBM Plex Mono', monospace;
     font-size: medium;
     letter-spacing: 1px;
+    text-align: center;
 }
 
 .container-md{
