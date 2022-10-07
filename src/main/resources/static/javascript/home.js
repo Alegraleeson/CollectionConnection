@@ -83,12 +83,10 @@ async function getCollectionById(collectionId){
 async function handleCollectionEdit(collectionId){
     let bodyObj = {
         id: collectionId,
-        name: collectionBody.value,
+        name: collectionName.value,
         image: collectionImage.value
     }
-    console.log(collectionId)
-    console.log(collectionBody)
-    console.log(collectionImage.value)
+
 
     await fetch(baseUrlCollections, {
         method: "PUT",
